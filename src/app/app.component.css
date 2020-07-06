@@ -1,0 +1,49 @@
+.logo {
+    margin: 5px;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+  .app-title {
+    font-size: 30px;
+  }
+  .container {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  input[type="text"] {
+    padding: 5px;
+    margin: 5px;
+  }
+  .add-btn {
+    margin: 5px;
+    border: 0px;
+    background-color: green;
+    color: white;
+    padding: 5px;
+  }
+  .list {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 1px 5px 1px 5px;
+    border-radius: 5px;
+    background: white;
+    width: fit-content;
+  }
+  .list ul {
+    margin: 0;
+    padding: 0;
+  }
+  .list li {
+    padding: 5px;
+    display: flex;
+    list-style-type: none;
+  }
+  .list li button {
+    background-color: #b80000;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-left: 100px;
+  }
+  
