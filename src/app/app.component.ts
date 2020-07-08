@@ -8,7 +8,6 @@ import { Todo } from './todo';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo';
 
   todoValue: string;
   list: Todo[];
@@ -18,19 +17,40 @@ export class AppComponent {
     this.todoValue = '';
   }
 
-  addItem() {
+  addTask() {
     if (this.todoValue !== '') {
       const newItem: Todo = {
         id: Date.now(),
         value: this.todoValue,
-        isDone: false
+        isDone: false,
+        textInputActive: false
       };
       this.list.push(newItem);
     }
     this.todoValue = '';
   }
 
-  deleteItem(id: number) {
+  taskDone(id: number) {
+    let taskDone = this.list.filter(item => item.id === id);
+    taskDone[0].isDone = !taskDone[0].isDone;
+  }
+
+  editTask(id: number) {
+    let editTask = this.list.filter(item => item.id === id);
+    editTask[0].textInputActive = true;
+    let notEditTask = this.list.filter(item => item.id !== id);
+    for (let i = 0; i < notEditTask.length; i++) {
+      notEditTask[i].textInputActive = false;
+    }
+  }
+
+  updateTask(id: number, value: string) {
+    let updateTask = this.list.filter(item => item.id === id);
+    updateTask[0].value = value;
+    updateTask[0].textInputActive = false;
+  }
+
+  deleteTask(id: number) {
     this.list = this.list.filter(item => item.id !== id);
   }
 

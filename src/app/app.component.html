@@ -1,30 +1,42 @@
-<div style="text-align: center;">
-  <img src="https://picsum.photos/200" alt="Logo" class="logo" />
-  <h1 class="app-title">
-    Angular Todo App
-  </h1>
-</div>
-<hr />
 <div class="container">
-  Add a todo...
-  <br />
-  <input 
-    type="text" 
-    class="input-text" 
-    placeholder="Type a todo"
-    [(ngModel)]="todoValue"
-    (keyup.enter)="addItem()"
-  />
-  <button class="add-btn" (click)="addItem()">Add Todo</button>
-  <div class="list">
-    <ul>
-      <li *ngFor="let item of list">
-        <input type="checkbox" name="isDone" 
-          [(ngModel)]="item.isDone"
-        />
-        {{item.value}}
-        <button class="btn" (click)="deleteItem(item.id)">Delete</button>
-      </li>
-    </ul>
+  <div class="display-3 text-center">Todo App</div>
+
+  <hr />
+
+  <div class="d-flex justify-content-between border p-2 m-2" *ngFor="let item of list">
+
+    <ng-container *ngIf="item.isDone; else elseBlockCheck" class="click">
+      <input type="button" id="taskDone" value="&#10004;" class="remove border-0 click px-1"
+        (click)="taskDone(item.id)">
+    </ng-container>
+    <ng-template #elseBlockCheck>
+      <input type="button" id="taskDone" value="&#9711;" class="remove border-0 click px-1" (click)="taskDone(item.id)">
+    </ng-template>
+
+    <ng-container *ngIf="item.textInputActive; else elseBlockText">
+      <input type="text" (keyup.enter)="updateTask(item.id, updatedValue.value)" #updatedValue value="{{item.value}}"
+        placeholder="Your task here..." class="w-100 border-0 px-2 {{'taskTextDone_'+item.isDone}}">
+    </ng-container>
+    <ng-template #elseBlockText>
+      <input type="text" readonly value="{{item.value}}" placeholder="Your task here..."
+        class="w-100 border-0 px-2 {{'taskTextDone_'+item.isDone}}">
+    </ng-template>
+
+    <ng-container *ngIf="item.isDone; else elseBlockEdit" class="click" data-toggle="tooltip" data-placement="top"
+      title="Completed tasks can't be edited/updated!">
+      <input type="button" id="editTask" value="&#9998;" disabled class="btn border-0 click px-1"
+        style="-webkit-transform:scaleX(-1);transform: scaleX(-1);" (click)="editTask(item.id)">
+    </ng-container>
+    <ng-template #elseBlockEdit>
+      <input type="button" id="editTask" value="&#9998;" class="border-0 click px-1"
+        style="-webkit-transform:scaleX(-1);transform: scaleX(-1);" (click)="editTask(item.id)">
+    </ng-template>
+
+    <input type="button" value="&#9940;" class="border-0 click px-1" (click)="deleteTask(item.id)">
+
+  </div>
+  <div class="d-flex justify-content-between border p-2 m-2">
+    <input type="text" class="todo" class="w-100 border-0" [(ngModel)]="todoValue" (keyup.enter)="addTask()">
+    <input type="button" value="&#10010;" class="border-0 click" (click)="addTask()" id="addItemBtn">
   </div>
 </div>
