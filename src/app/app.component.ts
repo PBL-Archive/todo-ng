@@ -11,6 +11,8 @@ export class AppComponent {
 
   todoValue: string;
   list: Todo[];
+  activeTodos = 0;
+  completedTodos = 0;
 
   ngOnInit() {
     this.list = [];
@@ -25,6 +27,7 @@ export class AppComponent {
         isDone: false,
         textInputActive: false
       };
+      this.activeTodos += 1;
       this.list.push(newItem);
     }
     this.todoValue = '';
@@ -33,6 +36,17 @@ export class AppComponent {
   todoDone(id: number) {
     let todoDone = this.list.filter(item => item.id === id);
     todoDone[0].isDone = !todoDone[0].isDone;
+    if (todoDone[0].isDone) {
+      this.completedTodos += 1;
+      if (!(this.activeTodos < 1)) {
+        this.activeTodos -= 1;
+      }
+    } else {
+      this.activeTodos += 1;
+      if (!(this.completedTodos < 1)) {
+        this.completedTodos -= 1;
+      }
+    }
   }
 
   editTodo(id: number) {
@@ -56,7 +70,17 @@ export class AppComponent {
   }
 
   deleteTodo(id: number) {
+    let itemDoneOrNot = this.list.filter(item => item.id === id);
     this.list = this.list.filter(item => item.id !== id);
+    if (itemDoneOrNot[0].isDone) {
+      if (!(this.completedTodos < 1)) {
+        this.completedTodos -= 1;
+      }
+    } else {
+      if (!(this.activeTodos < 1)) {
+        this.activeTodos -= 1;
+      }
+    }
   }
 
 }
