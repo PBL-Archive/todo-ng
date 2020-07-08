@@ -1,35 +1,39 @@
+body {
+    background-color: whitesmoke;
+}
 .container {
     max-width:540px!important;
 }
-
+.todo {
+    background-color: white;
+}
 input[type=button] {
     background-color: transparent;
+    min-width:36px!important;
+    max-width:36px!important;
+    min-height:36px!important;
+    max-height:36px!important;
+    padding:1px!important;
+    margin:0px!important;
+}
+input[type=text] {
+    padding:1px 8px!important;
+    margin:0px!important;
 }
 input[type=text]:focus {
     outline:none;
 }
 .click:hover {
-    background-color:lightgray;
+    background-color:rgb(240, 240, 240);
     border-radius:100px;
-}
-.click,
-#taskDone,
-#editTask {
-    max-width:26px!important;
-    max-height:26px!important;
-    width:100%;
-    height:100%;
-    padding:1px!important;
-    vertical-align: middle;
 }
 .click:focus {
     outline:none;
 }
-.taskTextDone_true {
+.todoTextDone_true {
     text-decoration: line-through;
     opacity: 0.5;
-} 
-#addItemBtn:hover {
-    background-color:lightgray;
-    border-radius:100px;
+}
+#textInputActive:focus {
+    background-color: rgb(240, 240, 240);
 }
